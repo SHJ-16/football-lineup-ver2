@@ -1,1 +1,584 @@
-:root{--ink:#142218;--muted:#728074;--line:#e3e9e2;--lime:#d9ff4f;--bg:#f6f8f5;--green:#2f7a4d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif}.app{max-width:1390px;margin:auto;padding:35px 44px 55px}.topbar{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}.topbar p,.roster header p{margin:0 0 6px;font:10px monospace;letter-spacing:1.4px;color:var(--muted)}h1{margin:0;font-size:24px;letter-spacing:-.5px}h1 span{color:#8b968d;margin:0 8px}.save{border:0;border-radius:7px;background:var(--ink);color:#fff;padding:12px 18px;font-weight:bold;cursor:pointer}.quarter-nav{display:flex;align-items:center;gap:7px;margin-bottom:16px}.quarter{border:1px solid var(--line);border-radius:7px;background:#fff;color:#718073;padding:10px 20px;font:700 12px monospace;cursor:pointer}.quarter.active{background:#1c2d1e;color:var(--lime);border-color:#1c2d1e}.quarter-nav span{margin-left:auto;color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:minmax(580px,1fr) 290px;gap:21px}.pitch{height:580px;overflow:hidden;position:relative;border-radius:12px;background:repeating-linear-gradient(90deg,#348353 0 10%,#2e794c 10% 20%);box-shadow:0 8px 22px #1d4b2d2b}.field-lines{position:absolute;inset:20px;border:1px solid #f9fff8a8}.half{position:absolute;left:0;top:50%;width:100%;border-top:1px solid #f9fff8a8}.circle{position:absolute;left:50%;top:50%;width:126px;height:126px;border:1px solid #f9fff8a8;border-radius:50%;transform:translate(-50%,-50%)}.area{position:absolute;left:29%;width:42%;height:17%;border:1px solid #f9fff8a8}.area.top{top:0;border-top:0}.area.bottom{bottom:0;border-bottom:0}.field-players{position:absolute;inset:0}.token{position:absolute;width:105px;text-align:center;transform:translate(-50%,-50%)}.shirt{width:46px;height:46px;margin:auto;display:grid;place-items:center;background:var(--lime);clip-path:polygon(27% 0,42% 11%,58% 11%,73% 0,100% 19%,83% 43%,78% 100%,22% 100%,17% 43%,0 19%);filter:drop-shadow(0 3px 2px #15352277);font:700 13px monospace}.token.gk .shirt{background:#f5a044;color:#fff}.token strong{display:block;margin:4px auto 0;padding:3px 5px;border-radius:4px;background:#fffffff0;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.token small{color:#ecffec;font:9px monospace}.field-note{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);color:#edffebaa;font-size:10px;white-space:nowrap}.side-panel{background:#fff;border:1px solid var(--line);border-radius:12px}.side-panel section{padding:21px;border-bottom:1px solid var(--line)}.side-panel section:last-child{border:0}.label-row{display:flex;justify-content:space-between;font-size:11px}.label-row span{font:10px monospace;color:var(--muted)}.formation-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:15px}.formation-buttons button{border:1px solid var(--line);background:#fafcf9;border-radius:5px;padding:9px 3px;color:#637265;font:10px monospace;cursor:pointer}.formation-buttons button.selected{background:#eff9d4;border-color:#c9e889;color:#466717;font-weight:bold}.muted{margin:13px 0 0;color:var(--muted);font-size:11px;line-height:1.5}.calc label{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:#637164;font-size:11px}.calc input{width:58px;padding:7px;border:1px solid var(--line);border-radius:5px;text-align:center}.calculation{margin-top:15px;padding:11px;background:#f5f9ed;border-radius:7px;color:#42523d;font-size:11px;line-height:1.5}.calculation b{color:#314c1b}.calculation small{display:block;margin-top:5px;color:#829080}.roster{margin-top:31px}.roster header{display:flex;justify-content:space-between;align-items:end}.roster h2{margin:0;font-size:18px}.roster h2 span{font:11px monospace;color:var(--muted)}.outline{border:1px solid #cfdccd;background:#fff;border-radius:6px;padding:8px 12px;color:#426932;font-weight:bold;font-size:12px;cursor:pointer}.roster-help{margin:12px 0;color:var(--muted);font-size:11px}.player-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.player-card{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px;min-width:0}.number{display:grid;place-items:center;flex:none;width:27px;height:27px;border-radius:50%;background:var(--lime);font:10px monospace}.player-info{min-width:0;flex:1}.name-edit{width:100%;border:0;padding:0;background:transparent;color:var(--ink);font-size:12px;font-weight:bold;outline:none}.player-info p{margin:4px 0 0;color:#6f7d70;font-size:10px;line-height:1.35}.player-info small{color:#9aa49b;font:9px monospace}.assign-buttons{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:88px}.assign-buttons button{border:1px solid var(--line);background:#fff;border-radius:4px;padding:5px 2px;color:#758075;font:8px monospace;cursor:pointer}.assign-buttons button.selected{background:#e8f9bd;border-color:#bbdf61;color:#486b18;font-weight:bold}.assign-buttons button:last-child{grid-column:1/3;color:#9a6e6e}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);opacity:0;background:#172518;color:#fff;padding:10px 15px;border-radius:6px;font-size:12px;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:850px){.app{padding:25px 18px}.layout{grid-template-columns:1fr}.side-panel{display:grid;grid-template-columns:repeat(3,1fr)}.side-panel section{border-bottom:0;border-right:1px solid var(--line)}.player-list{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.app{padding:18px 11px 35px}.topbar{margin-bottom:18px}.topbar h1{font-size:18px}.quarter-nav{gap:4px}.quarter{padding:9px 12px}.quarter-nav span{display:none}.pitch{height:calc(100svh - 260px);min-height:440px;max-height:560px}.field-lines{inset:13px}.circle{width:92px;height:92px}.token{width:76px}.shirt{width:38px;height:39px;font-size:11px}.token strong{font-size:9px}.token small{font-size:8px}.field-note{font-size:8px}.side-panel{display:block;margin-top:15px}.side-panel section{border-right:0;border-bottom:1px solid var(--line);padding:17px}.formation-buttons{grid-template-columns:repeat(4,1fr)}.player-list{grid-template-columns:1fr}.assign-buttons{width:102px}.roster{margin-top:24px}}
+/* ==========================================================================
+   1. 글로벌 변수 (CSS Variables) & 기본 리셋
+   ========================================================================== */
+:root {
+  --ink: #142218;    /* 메인 텍스트 / 다크 테마 색상 */
+  --muted: #728074;  /* 연한 안내 텍스트 / 보조 색상 */
+  --line: #e3e9e2;   /* 테두리(Border) 선 색상 */
+  --lime: #d9ff4f;   /* 라임색 (포인트 컬러 / 유니폼 기본 색상) */
+  --bg: #f6f8f5;     /* 전체 배경색 */
+  --green: #2f7a4d;  /* 축구장 잔디 관련 그린 색상 */
+}
+
+/* 전체 요소 박스 사이즈 기준 통일 (패딩/테두리가 크기에 포함됨) */
+* {
+  box-sizing: border-box;
+}
+
+/* 바디 기본 여백 제거 및 폰트/배경 설정 */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+/* ==========================================================================
+   2. 앱 전체 레이아웃 & 상단 헤더 (App Shell & Topbar)
+   ========================================================================== */
+/* 전체 앱 컨테이너 (최대 너비 및 중앙 정렬) */
+.app {
+  max-width: 1390px;
+  margin: auto;
+  padding: 35px 44px 55px;
+}
+
+/* 상단 정보 바 (타이틀 + 저장 버튼) */
+.topbar {
+  display: flex;
+  justify-content: space-between; /* 양끝 정렬 */
+  align-items: end;              /* 아래쪽 정렬 */
+  margin-bottom: 25px;
+}
+
+/* 상단 소제목 및 명단 헤더 서브텍스트 */
+.topbar p, .roster header p {
+  margin: 0 0 6px;
+  font: 10px monospace;
+  letter-spacing: 1.4px;         /* 자간 넓히기 */
+  color: var(--muted);
+}
+
+/* 대제목 (h1) 및 타이틀 내 구분 기호 */
+h1 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -.5px;
+}
+h1 span {
+  color: #8b968d;
+  margin: 0 8px;
+}
+
+/* 저장 버튼 */
+.save {
+  border: 0;
+  border-radius: 7px;
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   3. 쿼터 네비게이션 (1Q, 2Q, 3Q, 4Q 버튼)
+   ========================================================================== */
+.quarter-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 16px;
+  
+}
+
+/* 쿼터 버튼 기본 스타일 */
+.quarter {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: #718073;
+  padding: 10px 25px;
+  font: 700 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* 현재 활성화(선택)된 쿼터 버튼 */
+.quarter.active {
+  background: #1c2d1e;
+  color: var(--lime);
+  border-color: #1c2d1e;
+}
+
+/* 쿼터 바 우측 안내 문구 (선발 인원 등) */
+.quarter-nav span {
+  margin-left: auto; /* 오른쪽 끝으로 밀기 */
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   4. 메인 콘텐츠 대시보드 레이아웃 (Pitch + Side Panel)
+   ========================================================================== */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(580px, 1fr) 290px; /* 경기장(좌) : 사이드바(우) */
+  gap: 21px;
+}
+
+/* ==========================================================================
+   5. 축구 경기장 (Pitch & Lines)
+   ========================================================================== */
+.pitch {
+  height: 580px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  /* 잔디 패턴 스트라이프 배경 */
+  background: repeating-linear-gradient(90deg, #348353 0 10%, #2e794c 10% 20%);
+  box-shadow: 0 8px 22px #1d4b2d2b;
+}
+
+/* 경기장 라인 공통 요소 */
+.field-lines {
+  position: absolute;
+  inset: 20px; /* top, right, bottom, left 모두 20px */
+  border: 1px solid #f9fff8a8;
+}
+.half {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  border-top: 1px solid #f9fff8a8;
+}
+.circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 126px;
+  height: 126px;
+  border: 1px solid #f9fff8a8;
+  border-radius: 50%;
+  transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+}
+.area {
+  position: absolute;
+  left: 29%;
+  width: 42%;
+  height: 17%;
+  border: 1px solid #f9fff8a8;
+}
+.area.top { top: 0; border-top: 0; }
+.area.bottom { bottom: 0; border-bottom: 0; }
+
+/* 하단 경고/안내 텍스트 */
+.field-note {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  color: #edffebaa;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   6. 필드 위 선수 토큰 (Player Tokens & Shirts)
+   ========================================================================== */
+.field-players {
+  position: absolute;
+  inset: 0;
+}
+
+.token {
+  position: absolute;
+  width: 105px;
+  text-align: center;
+  transform: translate(-50%, -50%); /* 좌표 중심점 맞춤 */
+}
+
+/* 유니폼 셔츠 아이콘 (SVG 없이 Polygon 클리핑으로 구현) */
+.shirt {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  background: var(--lime);
+  clip-path: polygon(27% 0, 42% 11%, 58% 11%, 73% 0, 100% 19%, 83% 43%, 78% 100%, 22% 100%, 17% 43%, 0 19%);
+  filter: drop-shadow(0 3px 2px #15352277);
+  font: 700 13px monospace;
+}
+
+/* 골키퍼 전용 유니폼 색상 (주황색) */
+.token.gk .shirt {
+  background: #f5a044;
+  color: #fff;
+}
+
+/* 토큰 내 선수 이름 이름표 */
+.token strong {
+  display: block;
+  margin: 4px auto 0;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: #fffffff0;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 이름이 길면 ... 처리 */
+}
+
+/* 토큰 내 포지션 라벨 (GK, CB, ST 등) */
+.token small {
+  color: #ecffec;
+  font: 10px monospace;
+}
+
+/* ==========================================================================
+   7. 우측 설정 패널 (포메이션 선택 & 출전 계산기)
+   ========================================================================== */
+.side-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.side-panel section {
+  padding: 21px;
+  border-bottom: 1px solid var(--line);
+}
+.side-panel section:last-child {
+  border: 0;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+.label-row span {
+  font: 10px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* 포메이션 선택 버튼 그리드 (4-3-3, 4-4-2 등) */
+.formation-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-top: 15px;
+}
+.formation-buttons button {
+  border: 1px solid var(--line);
+  background: #fafcf9;
+  border-radius: 5px;
+  padding: 9px 3px;
+  color: #637265;
+  font: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.formation-buttons button.selected {
+  background: #eff9d4;
+  border-color: #c9e889;
+  color: #466717;
+  font-weight: bold;
+}
+
+.muted {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* 쿼터 계산기 입력폼 */
+.calc label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  color: #637164;
+  font-size: 13px;
+  font-weight: bold;
+}
+.calc input {
+  width: 58px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* 계산 결과 표시 박스 */
+.calculation {
+  margin-top: 15px;
+  padding: 11px;
+  background: #f5f9ed;
+  border-radius: 7px;
+  color: #42523d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.calculation b { color: #314c1b; }
+.calculation small {
+  display: block;
+  margin-top: 5px;
+  color: #829080;
+}
+
+/* ==========================================================================
+   8. 하단 선수 명단 (Roster & Player Cards)
+   ========================================================================== */
+.roster {
+  margin-top: 31px;
+}
+.roster header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.roster h2 { margin: 0; font-size: 18px; }
+.roster h2 span { font: 11px monospace; color: var(--muted); }
+
+/* 선수 추가 버튼 (라인 외곽선 스타일) */
+.outline {
+  border: 1px solid #cfdccd;
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #426932;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.roster-help {
+  margin: 12px 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* 선수 카드 리스트 그리드 (가로 3열) */
+.player-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* 개별 선수 카드 */
+.player-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px;
+  min-width: 0;
+}
+
+/* 선수 등번호 동그라미 */
+.number {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: var(--lime);
+  font: 12px monospace;
+}
+
+/* 선수 이름 & 출전 정보 영역 */
+.player-info {
+  min-width: 0;
+  flex: 1;
+}
+
+/* 선수 이름 수정 input */
+.name-edit {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+}
+.player-info p {
+  margin: 4px 0 0;
+  color: #6f7d70;
+  font-size: 12px;
+  line-height: 1.35;
+}
+.player-info small {
+  color: #9aa49b;
+  font: 10px monospace;
+}
+
+/* 선수 카드 우측 [선발], [교체] 버튼 영역 */
+.assign-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  width: 88px;
+}
+.assign-buttons button {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 4px;
+  padding: 5px 2px;
+  color: #758075;
+  font: 12px monospace;
+  cursor: pointer;
+}
+.assign-buttons button.selected {
+  background: #e8f9bd;
+  border-color: #bbdf61;
+  color: #486b18;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   9. 토스트 알림 (Toast Notification)
+   ========================================================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translate(-50%, 18px);
+  opacity: 0;
+  background: #172518;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 12px;
+  transition: .2s;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ==========================================================================
+   10. 반응형 미디어 쿼리 (Responsive Media Queries)
+   ========================================================================== */
+/* 태블릿 / 중형 화면 (너비 850px 이하) */
+@media (max-width: 850px) {
+  .app { padding: 25px 18px; }
+  .layout { grid-template-columns: 1fr; } /* 경기장과 사이드바를 세로로 배치 */
+  .side-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 사이드바 내부 섹션을 가로 3열로 */
+  }
+  .side-panel section {
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .player-list { grid-template-columns: repeat(2, 1fr); } /* 선수 명단을 가로 2열로 */
+}
+
+/* 모바일 화면 (너비 620px 이하) */
+@media (max-width: 620px) {
+  .app { padding: 18px 11px 35px; }
+  .topbar { margin-bottom: 18px; }
+  .topbar h1 { font-size: 18px; }
+  .quarter-nav { gap: 4px; }
+  .quarter { padding: 9px 12px; }
+  .quarter-nav span { display: none; } /* 모바일에서는 쿼터 설명 숨김 */
+  
+  /* 경기장 높이 모바일 축소 */
+  .pitch {
+    height: calc(100svh - 260px);
+    min-height: 440px;
+    max-height: 560px;
+  }
+  .field-lines { inset: 13px; }
+  .circle { width: 92px; height: 92px; }
+  
+  /* 토큰 및 셔츠 크기 모바일 축소 */
+  .token { width: 76px; }
+  .shirt { width: 38px; height: 39px; font-size: 11px; }
+  .token strong { font-size: 9px; }
+  .token small { font-size: 8px; }
+  .field-note { font-size: 8px; }
+  
+  .side-panel { display: block; margin-top: 15px; }
+  .side-panel section {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 17px;
+  }
+  .formation-buttons { grid-template-columns: repeat(4, 1fr); } /* 포메이션 버튼 4열 배치 */
+  .player-list { grid-template-columns: 1fr; } /* 선수 명단 1열(세로 1줄)로 배치 */
+  .assign-buttons { width: 102px; }
+  .roster { margin-top: 24px; }
+}
+/* 위치 교환 버튼 및 선택 상태 스타일 */
+.swap-btn {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  padding: 10px 20px;
+  border-radius: 7px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.swap-btn:hover {
+  background: #f0f4f0;
+}
+
+.swap-btn.active {
+  background: #1c2d1e;
+  color: #fff;
+  border-color: #e68a00;
+  box-shadow: 0 2px 8px rgba(194, 186, 173, 0.4);
+}
+
+/* 위치 교환 모드에서 선택된 선수의 토큰 강조 효과 */
+.token.swap-selected {
+  outline: 3px solid #ff9800;
+  outline-offset: 3px;
+  transform: translate(-50%, -50%) scale(1.15) !important;
+  z-index: 10;
+}
+
+/* 선발 전체 제외 버튼 기본 스타일 */
+.clear-all-btn {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  padding: 10px 20px;
+  border-radius: 7px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* 호버 시 반응 (위치 교환 버튼과 동일한 연한 그린/배경톤) */
+.clear-all-btn:hover {
+  background: #f0f4f0;
+}
+
+/* 클릭(Active/Pressed)되었을 때 다크 그린 배경 강조 */
+.clear-all-btn:active {
+  background: #1c2d1e;
+  color: #fff;
+  border-color: #e68a00;
+  transform: translateY(1px);
+}
+
+.assign-buttons button {
+  white-space: nowrap; /* 글자가 세로로 꺾이는 것 방지 */
+  min-width: 45px;     /* 글자가 잘리지 않도록 최소 너비 확보 */
+  word-break: keep-all;
+  height: 50px;
+}
+
+.assign-buttons {
+  display: flex;
+  flex-direction: row; /* 세로로 배치 */
+  gap: 6px;               /* 버튼 사이 간격 */
+  align-items: flex-end;  /* 우측 정렬 */
+  flex-shrink: 0;         /* 카드가 좁아져도 버튼 영역 크기 줄어들지 않음 */
+}
