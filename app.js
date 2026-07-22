@@ -211,7 +211,7 @@ fieldHost.addEventListener("touchend", () => {
 function summary(id) {
   return quarters.map((q, i) => {
     const s = status(id, q);
-    return s ? `Q${i + 1}${s === "start" ? "선발" : "교체"}` : "";
+    return s === "start" ? `Q${i+1}선발`:"";
   }).filter(Boolean);
 }
 
@@ -222,8 +222,7 @@ function renderRoster() {
     const s = status(p.id), assign = summary(p.id);
     const card = document.createElement("article");
     card.className = "player-card";
-    card.innerHTML = `<div class="number">${p.number}</div><div class="player-info"><input class="name-edit" value="${p.name}" maxlength="16" aria-label="Player name"><p>${assign.length ? assign.join(" · ") : "쿼터에 포함되지 않았습니다."}</p><small>${assign.length} 쿼터 출전</small></div><div class="assign-buttons"><button data-action="start" class="${s === "start" ? "selected" : ""}">선발</button><button data-action="bench" class="${s === "bench" ? "selected" : ""}">교체</button><button data-action="clear" title="Remove from this quarter">x</button></div>`;
-    
+    card.innerHTML = `<div class="number">${p.number}</div><div class="player-info"><input class="name-edit" value="${p.name}" maxlength="16" aria-label="Player name"><p>${assign.length ? assign.join(" · ") : "쿼터에 포함되지 않았습니다."}</p><small>${assign.length} 쿼터 출전</small></div><div class="assign-buttons"><button data-action="start" class="${s === "start" ? "selected" : ""}">선발</button><button data-action="bench" class="${s === "bench" ? "selected" : ""}">교체</button></div>`;    
     card.querySelector(".name-edit").oninput = e => { p.name = e.target.value || "Player"; renderField(); };
     card.querySelectorAll("button").forEach(b => b.onclick = () => setStatus(p.id, b.dataset.action));
     host.append(card);
@@ -249,7 +248,7 @@ function renderForms() {
 
 function calculate() {
   const pool = Math.max(1, Number($("#poolInput").value) || 1), spots = Math.max(1, Number($("#spotsInput").value) || 1), slots = spots * 4, base = Math.floor(slots / pool), extra = slots % pool;
-  $("#calculation").innerHTML = extra ? `<b>${pool - extra}</b>명의 선수들은 <b>${base}</b>쿼터 출전 <br> <b>${extra}</b>명의 선수들은 <b>${base + 1}</b>쿼터 출전<small>${spots} 필드 인원 × 4쿼터 = ${slots} 전체 필요 인원</small>` : `All <b>${pool}</b> players should play <b>${base}</b> quarters.<small>${spots} field spots × 4 quarters = ${slots} total field-player assignments</small>`;
+  $("#calculation").innerHTML = extra ? `<b>${pool - extra}</b>명의 선수들은 <b>${base}</b>쿼터 출전 <br> <b>${extra}</b>명의 선수들은 <b>${base + 1}</b>쿼터 출전<small>${spots} 필드 인원 × 4쿼터 = ${slots} 전체 필요 인원</small>` : ` <b>${pool}</b>명의 선수들은 <b>${base}</b>쿼터 출전 <small>${spots} 필드 인원 × 4쿼터 =  ${slots} 전체 필요 인원</small>`;
 }
 
 function render() {
