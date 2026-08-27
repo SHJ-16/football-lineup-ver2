@@ -247,8 +247,51 @@ function renderForms() {
 }
 
 function calculate() {
-  const pool = Math.max(1, Number($("#poolInput").value) || 1), spots = Math.max(1, Number($("#spotsInput").value) || 1), slots = spots * 4, base = Math.floor(slots / pool), extra = slots % pool;
-  $("#calculation").innerHTML = extra ? `<b>${pool - extra}</b>명의 선수들은 <b>${base}</b>쿼터 출전 <br> <b>${extra}</b>명의 선수들은 <b>${base + 1}</b>쿼터 출전<small>${spots} 필드 인원 × 4쿼터 = ${slots} 전체 필요 인원</small>` : ` <b>${pool}</b>명의 선수들은 <b>${base}</b>쿼터 출전 <small>${spots} 필드 인원 × 4쿼터 =  ${slots} 전체 필요 인원</small>`;
+
+  // ① 전체 선수 수 가져오기
+  const pool = Math.max(1, Number($("#poolInput").value) || 1)-1,
+
+    // ② 한 쿼터에 뛰는 선수 수 가져오기
+    spots = Math.max(1, Number($("#spotsInput").value) || 1),
+
+    // ③ 전체 출전 자리 계산
+    //    예: 10명 × 4쿼터 = 40자리
+    slots = spots * 4,
+
+    // ④ 모든 선수에게 기본적으로 줄 수 있는 쿼터 수
+    //    예: 40자리 ÷ 12명 = 3.xxx → 3쿼터
+    base = Math.floor(slots / pool),
+
+    // ⑤ 기본적으로 나눠주고 남는 자리 수
+    //    예: 40 ÷ 12 → 나머지 4
+    extra = slots % pool;
+
+
+  // ⑥ 남는 자리가 있다면
+  //    일부 선수는 기본 쿼터보다 1쿼터 더 뛰게 함
+  if (extra) {
+
+    $("#calculation").innerHTML = `
+      <b>${pool - extra}</b>명의 선수들은 <b>${base}</b>쿼터 출전 <br>
+      <b>${extra}</b>명의 선수들은 <b>${base + 1}</b>쿼터 출전
+
+      <small>
+        ${spots} 필드 인원 × 4쿼터 = ${slots} 전체 필요 인원
+      </small>
+    `;
+
+  } else {
+
+    // ⑦ 남는 자리가 없다면
+    //    모든 선수가 정확히 똑같은 쿼터를 뛰게 됨
+    $("#calculation").innerHTML = `
+      <b>${pool}</b>명의 선수들은 <b>${base}</b>쿼터 출전
+
+      <small>
+        ${spots} 필드 인원 × 4쿼터 = ${slots} 전체 필요 인원
+      </small>
+    `;
+  }
 }
 
 function render() {
