@@ -1,6 +1,27 @@
 /* ==========================================================================
    1. 글로벌 변수 (CSS Variables) & 기본 리셋
    ========================================================================== */
+/* Draw tool, import modal, and result area */
+.draw-section { margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(0, 0, 0, .15); }
+.draw-btn { width: 100%; padding: 10px; color: #fff; background: #17b978; border: 0; border-radius: 6px; font-size: .95rem; font-weight: 700; cursor: pointer; transition: background .2s; }
+.draw-btn:hover { background: #139a63; }
+.draw-result-container { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.draw-result-card { padding: 10px 12px; background: #f8faf9; border: 1px solid #e0e6e3; border-left: 4px solid #17b978; border-radius: 6px; }
+.draw-result-card h4 { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; color: #183a25; font-size: .9rem; }
+.draw-result-card p { margin: 0; color: #333; font-size: .85rem; line-height: 1.4; word-break: keep-all; }
+.draw-result-card .badge { padding: 2px 6px; color: #183a25; background: #e4ff63; border-radius: 4px; font-size: .75rem; font-weight: 700; }
+.modal-overlay { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, .5); }
+.modal-overlay.active { display: flex; }
+.modal-content { width: 90%; max-width: 450px; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, .2); }
+.modal-content h3 { margin-bottom: 10px; color: #183a25; }
+.modal-content p { margin-bottom: 12px; color: #666; font-size: .85rem; }
+.modal-content textarea { box-sizing: border-box; width: 100%; height: 120px; padding: 8px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; resize: vertical; }
+.modal-content select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 12px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 15px; }
+.modal-actions button { padding: 8px 16px; border: 0; border-radius: 4px; font-weight: 700; cursor: pointer; }
+.btn-submit { color: #fff; background: #17b978; }
+.btn-close { color: #333; background: #ccc; }
+
 :root {
   --ink: #142218;    /* 메인 텍스트 / 다크 테마 색상 */
   --muted: #728074;  /* 연한 안내 텍스트 / 보조 색상 */
@@ -510,20 +531,27 @@ h1 span {
   .assign-buttons { width: 102px; }
   .roster { margin-top: 24px; }
 }
-/* 위치 교환 버튼 및 선택 상태 스타일 */
-.swap-btn {
+/* 쿼터 바 작업 버튼 공통 스타일 */
+.swap-btn,
+.clear-all-btn,
+#kakaoImportBtn {
   border: 1px solid var(--line);
   background: #ffffff;
   color: var(--ink);
   padding: 10px 20px;
   border-radius: 7px;
   font-family: inherit;
+  font-size: inherit;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .swap-btn:hover {
+  background: #f0f4f0;
+}
+
+#kakaoImportBtn:hover {
   background: #f0f4f0;
 }
 
@@ -540,19 +568,6 @@ h1 span {
   outline-offset: 3px;
   transform: translate(-50%, -50%) scale(1.15) !important;
   z-index: 10;
-}
-
-/* 선발 전체 제외 버튼 기본 스타일 */
-.clear-all-btn {
-  border: 1px solid var(--line);
-  background: #ffffff;
-  color: var(--ink);
-  padding: 10px 20px;
-  border-radius: 7px;
-  font-family: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 /* 호버 시 반응 (위치 교환 버튼과 동일한 연한 그린/배경톤) */
@@ -577,8 +592,10 @@ h1 span {
 
 .assign-buttons {
   display: flex;
+
   flex-direction: row; /* 세로로 배치 */
   gap: 6px;               /* 버튼 사이 간격 */
   align-items: flex-end;  /* 우측 정렬 */
   flex-shrink: 0;         /* 카드가 좁아져도 버튼 영역 크기 줄어들지 않음 */
 }
+
