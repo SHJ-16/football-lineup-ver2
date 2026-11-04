@@ -3,34 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Quarter Lineup Builder</title>
   <link rel="stylesheet" href="lineup-v2.css">
+  <!-- Legacy inline styles moved to lineup-v2.css.
+    /* 추첨기, 모달 및 결과 텍스트 영역 스타일 */
+    
+
+  -->
 </head>
 <body>
   <main class="app">
-<header class="topbar">
-  <div>
-    <p>QUARTER LINEUP BUILDER</p>
-    <h1>축구 라인업 생성기 <span>·</span> Match Plan</h1>
-  </div>
+    <header class="topbar">
+      <div>
+        <p>QUARTER LINEUP BUILDER</p>
+        <h1>축구 라인업 생성기 <span>·</span> Match Plan</h1>
+      </div>
 
-  <div class="header-buttons">
-  <button id="copyImageBtn" class="save">📋 이미지 복사</button>
-  <button id="saveBtn" class="save">저장하기</button>
-</div>
-</header>    <section class="quarter-nav" aria-label="Quarter selection"><button data-quarter="0" class="quarter active">1쿼터</button><button data-quarter="1" class="quarter">2쿼터</button><button data-quarter="2" class="quarter">3쿼터</button><button data-quarter="3" class="quarter">4쿼터</button><button id="swapBtn" class="swap-btn">⇄ 위치 교환</button><button id="clearAllBtn" class="clear-all-btn">선발 전체 제외</button><span id="quarterStatus">선발 11 · 교체 0 </span></section>
+      <div class="header-buttons">
+        <button id="copyImageBtn" class="save">이미지 복사</button>
+        <button id="saveBtn" class="save">저장하기</button>
+      </div>
+    </header> 
+    <section class="quarter-nav" aria-label="Quarter selection">
+      <button data-quarter="0" class="quarter active">1쿼터</button>
+      <button data-quarter="1" class="quarter">2쿼터</button>
+      <button data-quarter="2" class="quarter">3쿼터</button>
+      <button data-quarter="3" class="quarter">4쿼터</button>
+      <button id="swapBtn" class="swap-btn">⇄ 위치 교환</button>
+      <button id="clearAllBtn" class="clear-all-btn">선발 전체 제외</button>
+      <button id="kakaoImportBtn" class="outline">명단 추가</button>
+      <span id="quarterStatus">선발 11 · 교체 0 </span>
+    </section>
+    
     <div class="layout">
-      <section class="pitch-card"><div class="pitch"><div class="field-lines"><i class="half"></i><i class="circle"></i><i class="area top"></i><i class="area bottom"></i></div><div id="fieldPlayers" class="field-players"></div><div class="field-note">Only START players appear on the field</div></div></section>
+      <section class="pitch-card">
+        <div class="pitch">
+          <div class="field-lines"><i class="half"></i><i class="circle"></i><i class="area top"></i><i class="area bottom"></i></div>
+          <div id="fieldPlayers" class="field-players"></div>
+          <div class="field-note">Only START players appear on the field</div>
+        </div>
+      </section>
+      
       <aside class="side-panel">
         <section><div class="label-row"><b>FORMATION</b><span id="formationName">4 - 3 - 3</span></div><div id="formationButtons" class="formation-buttons"></div></section>
         <section><div class="label-row"><b>선발 라인업 인원</b><span id="starterCounter">11 / 11</span></div><p class="muted">선발 라인업은 11명이 되어야 합니다.</p></section>
-        <section class="calc"><div class="label-row"><b>인원별 쿼터 계산기</b><span>4 quarters</span></div><label>총 인원<input id="poolInput" type="number" min="1" value="13"></label><label>필드 플레이어 인원<br>(골키퍼 미포함) <input id="spotsInput" type="number" min="1" value="10"></label><div id="calculation" class="calculation"></div></section>
+        
+        <section class="calc">
+          <div class="label-row"><b>인원별 쿼터 계산기</b><span>4 quarters</span></div>
+          <label>총 인원<input id="poolInput" type="number" min="1" value="13"></label>
+          <label>필드 플레이어 인원<br>(골키퍼 미포함) <input id="spotsInput" type="number" min="1" value="10"></label>
+          <div id="calculation" class="calculation"></div>
+          
+          <!-- 💡 무작위 추첨기 영역 -->
+          <div class="draw-section">
+            <div class="label-row"><b>인원 기준 무작위 추첨기</b></div>
+            <p class="muted" style="margin-bottom: 8px;">계산된 쿼터 출전 기준에 맞춰 골키퍼 선택 후 랜덤 추첨합니다.</p>
+            <button id="drawQuartersBtn" class="draw-btn">골키퍼 무작위 추첨</button>
+            
+            <div id="drawResultContainer" class="draw-result-container"></div>
+          </div>
+        </section>
       </aside>
     </div>
-    <section class="roster"><header><div><p>PLAYERS</p><h2>Roster <span id="rosterCount"></span></h2></div><button id="addPlayer" class="outline">+ 선수 추가</button></header><p class="roster-help">각 선수의 버튼을 사용하여 선택한 쿼터의 선발 라인업이나 벤치에 추가하세요. 새 플레이어는 할당될 때까지 이 목록에 남아 있습니다.</p><div id="playerList" class="player-list"></div></section>
+    
+    <section class="roster">
+      <header>
+        <div><p>PLAYERS</p><h2>Roster <span id="rosterCount"></span></h2></div>
+        <button id="addPlayer" class="outline">+ 선수 추가</button>
+      </header>
+      <p class="roster-help">각 선수의 버튼을 사용하여 선택한 쿼터의 선발 라인업이나 벤치에 추가하세요. 새 플레이어는 할당될 때까지 이 목록에 남아 있습니다.</p>
+      <div id="playerList" class="player-list"></div>
+    </section>
   </main>
+
+  <!-- 카카오톡 명단 불러오기 모달 -->
+  <div id="kakaoModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>카카오톡 명단 불러오기</h3>
+      <p class="muted">카톡방 메시지를 그대로 붙여넣으세요 (예: 송효준 전진우)</p>
+      <textarea id="kakaoInput" placeholder="송효준&#10;전진우&#10;김관형"></textarea>
+      <div class="modal-actions">
+        <button id="closeKakaoModalBtn" class="btn-close">취소</button>
+        <button id="submitKakaoModalBtn" class="btn-submit">등록하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💡 골키퍼 선택 모달 -->
+  <div id="gkSelectModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>🧤 골키퍼 선택</h3>
+      <p>4쿼터 고정 전담 골키퍼를 지정하거나 무작위로 선택하세요.</p>
+      <select id="gkSelectDropdown"></select>
+      <div class="modal-actions">
+        <button id="closeGkModalBtn" class="btn-close">취소</button>
+        <button id="submitGkModalBtn" class="btn-submit">추첨 진행</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast"></div>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
+
