@@ -1,0 +1,78 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Quarter Lineup Builder integration tests</title>
+<style>body{font:14px system-ui;margin:24px}.pass{color:#087f23}.fail{color:#b00020}iframe{width:1px;height:1px;border:0;position:absolute}</style>
+<h1>Quarter Lineup Builder integration tests</h1>
+<ol id="results"></ol>
+<script>
+  const results = document.querySelector('#results');
+  const tests = [];
+  const test = (name, run) => tests.push({ name, run });
+  const assert = (condition, message = 'Assertion failed') => { if (!condition) throw new Error(message); };
+  const loadApp = saved => new Promise(resolve => {
+    localStorage.clear();
+    if (saved) localStorage.setItem('quarter-lineup', JSON.stringify(saved));
+    const frame = document.createElement('iframe');
+    frame.onload = () => resolve(frame);
+    frame.src = `../index.html?test=${Date.now()}-${Math.random()}`;
+    document.body.append(frame);
+  });
+  const click = (window, selector) => window.document.querySelector(selector).click();
+
+  test('기본 명단과 쿼터 선발을 렌더링한다', async () => {
+    const frame = await loadApp();
+    const doc = frame.contentDocument;
+    assert(doc.querySelectorAll('.player-card').length === 13, '기본 선수는 13명이어야 합니다.');
+    assert(doc.querySelectorAll('#fieldPlayers .token').length === 11, '기본 선발은 11명이어야 합니다.');
+  });
+
+  test('빈 카카오 명단은 기존 명단을 유지한다', async () => {
+    const frame = await loadApp(), win = frame.contentWindow, doc = frame.contentDocument;
+    click(win, '#kakaoImportBtn');
+    click(win, '#submitKakaoModalBtn');
+    assert(doc.querySelectorAll('.player-card').length === 13, '빈 입력이 명단을 덮어쓰면 안 됩니다.');
+  });
+
+  test('가져온 이름은 중복 제거되고 HTML로 실행되지 않는다', async () => {
+    const frame = await loadApp(), win = frame.contentWindow, doc = frame.contentDocument;
+    click(win, '#kakaoImportBtn');
+    const input = doc.querySelector('#kakaoInput');
+    input.value = '1. 홍길동\n2. 홍길동\n3. <img src=x onerror=alert(1)>테스터';
+    click(win, '#submitKakaoModalBtn');
+    assert(doc.querySelectorAll('.player-card').length === 2, '중복 이름은 하나만 남아야 합니다.');
+    assert(!doc.querySelector('#playerList img'), '이름이 HTML 요소로 해석되면 안 됩니다.');
+  });
+
+  test('잘못된 저장 데이터는 안전하게 무시한다', async () => {
+    const frame = await loadApp({ players: [{ id: 1, name: null }], quarters: [{}] });
+    assert(frame.contentDocument.querySelectorAll('.player-card').length === 13, '손상된 저장값 대신 기본 상태를 사용해야 합니다.');
+  });
+
+  test('빈 값과 잘못된 숫자 입력은 계산 결과를 깨뜨리지 않는다', async () => {
+    const frame = await loadApp(), win = frame.contentWindow, doc = frame.contentDocument;
+    const pool = doc.querySelector('#poolInput');
+    const spots = doc.querySelector('#spotsInput');
+    pool.value = ''; pool.dispatchEvent(new win.Event('input', { bubbles: true }));
+    spots.value = '-10'; spots.dispatchEvent(new win.Event('input', { bubbles: true }));
+    assert(!/NaN|Infinity/.test(doc.querySelector('#calculation').textContent), '계산 결과는 유한한 값이어야 합니다.');
+  });
+
+  test('없어진 골키퍼 선택값도 예외 없이 처리한다', async () => {
+    const frame = await loadApp(), win = frame.contentWindow, doc = frame.contentDocument;
+    click(win, '#drawQuartersBtn');
+    const select = doc.querySelector('#gkSelectDropdown');
+    const invalid = doc.createElement('option'); invalid.value = 'missing-player'; invalid.textContent = 'missing'; select.append(invalid); select.value = invalid.value;
+    click(win, '#submitGkModalBtn');
+    assert(doc.querySelector('#toast').textContent.length > 0, '안전한 오류 안내가 표시되어야 합니다.');
+  });
+
+  (async () => {
+    for (const { name, run } of tests) {
+      const item = document.createElement('li');
+      try { await run(); item.textContent = `PASS — ${name}`; item.className = 'pass'; }
+      catch (error) { item.textContent = `FAIL — ${name}: ${error.message}`; item.className = 'fail'; }
+      results.append(item);
+    }
+  })();
+</script>
+
