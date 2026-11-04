@@ -208,6 +208,23 @@ h1 span {
   width: 105px;
   text-align: center;
   transform: translate(-50%, -50%); /* 좌표 중심점 맞춤 */
+  cursor: grab;
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.token[draggable="false"] {
+  cursor: pointer;
+}
+
+.token[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+/* 클리핑 바깥에서 필터를 적용해 유니폼 모양을 따라 외곽선을 표시 */
+.shirt-outline {
+  width: max-content;
+  margin: auto;
+  transition: filter .18s ease;
 }
 
 /* 유니폼 셔츠 아이콘 (SVG 없이 Polygon 클리핑으로 구현) */
@@ -240,12 +257,41 @@ h1 span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; /* 이름이 길면 ... 처리 */
+  transition: background-color .18s ease;
 }
 
 /* 토큰 내 포지션 라벨 (GK, CB, ST 등) */
 .token small {
-  color: #ecffec;
-  font: 10px monospace;
+  color: #fff;
+  font: 700 10px monospace;
+}
+
+/* 마우스로 가리킨 선수를 강조하고 터치 기기의 호버 잔상을 방지 */
+@media (hover: hover) and (pointer: fine) {
+  .token:hover {
+    transform: translate(-50%, -50%) translateY(-4px) scale(1.08);
+    filter: drop-shadow(0 6px 5px #15352266);
+    z-index: 2;
+  }
+
+  .token:hover strong {
+    background-color: #f3ffcc;
+  }
+
+  .token:hover .shirt-outline {
+    filter: drop-shadow(2px 0 0 #000)
+            drop-shadow(-2px 0 0 #000)
+            drop-shadow(0 2px 0 #000)
+            drop-shadow(0 -2px 0 #000);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .token,
+  .shirt-outline,
+  .token strong {
+    transition: none;
+  }
 }
 
 /* ==========================================================================

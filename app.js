@@ -152,7 +152,7 @@ function renderFieldLegacy() {
     el.draggable = !isSwapMode;
     el.dataset.id = id;
 
-    el.innerHTML = `<div class="shirt">${p.number}</div><strong>${escapeHtml(p.name)}</strong><small>${posInfo.posName}</small>`;
+    el.innerHTML = `<div class="shirt-outline"><div class="shirt">${p.number}</div></div><strong>${escapeHtml(p.name)}</strong><small>${posInfo.posName}</small>`;
     
     el.onclick = (e) => {
       if (!isSwapMode) return;
@@ -201,11 +201,14 @@ function renderField() {
     const shirt = document.createElement("div");
     shirt.className = "shirt";
     shirt.textContent = player.number;
+    const shirtOutline = document.createElement("div");
+    shirtOutline.className = "shirt-outline";
+    shirtOutline.append(shirt);
     const name = document.createElement("strong");
     name.textContent = player.name;
     const label = document.createElement("small");
     label.textContent = position.posName;
-    token.append(shirt, name, label);
+    token.append(shirtOutline, name, label);
     fragment.append(token);
   });
 
